@@ -1,0 +1,380 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.controls {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.controls h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.toppings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.topping-option {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.topping-option:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.topping-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.topping-option span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.clear-btn {
+    width: 100%;
+    padding: 12px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.clear-btn:hover {
+    background: #c82333;
+}
+
+.pizza-display {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pizza-display h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.pizza-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pizza {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.pizza-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #f4d3a0;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pizza-sauce {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    background: radial-gradient(circle, #d84315 0%, #bf360c 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pizza-cheese {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, #ffe082 20%, #ffca28 80%);
+    border-radius: 50%;
+    opacity: 0.95;
+}
+
+.toppings-layer {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+}
+
+.topping {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.topping.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Pepperoni */
+.pepperoni-slice {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #d32f2f 60%, #b71c1c 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pepperoni-slice::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(139, 0, 0, 0.4);
+    border-radius: 50%;
+    top: 15px;
+    left: 20px;
+}
+
+/* Mushrooms */
+.mushroom {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: radial-gradient(ellipse, #d7ccc8 40%, #a1887f 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mushroom::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 15px;
+    background: #efebe9;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Olives */
+.olive {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #263238 60%, #000000 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.olive::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #8b0000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Peppers */
+.pepper {
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+    border-radius: 50% 40% 40% 50% / 60% 40% 60% 40%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    transform: rotate(45deg);
+}
+
+/* Onions */
+.onion {
+    position: absolute;
+    width: 35px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(238, 224, 229, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.onion::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(238, 224, 229, 0.7);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Basil */
+.basil-leaf {
+    position: absolute;
+    width: 30px;
+    height: 35px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    border-radius: 50% 0 50% 0;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    transform: rotate(45deg);
+}
+
+.basil-leaf::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    background: #1b5e20;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Tomatoes */
+.tomato {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: radial-gradient(circle, #ff5252 60%, #d32f2f 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.tomato::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    background: #4caf50;
+    border-radius: 0 50% 0 0;
+    top: -5px;
+    left: 10px;
+}
+
+/* Bacon */
+.bacon-strip {
+    position: absolute;
+    width: 60px;
+    height: 15px;
+    background: linear-gradient(90deg, #d32f2f 0%, #8b4513 30%, #d32f2f 50%, #8b4513 70%, #d32f2f 100%);
+    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Pineapple */
+.pineapple-chunk {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #fff9c4 40%, #fdd835 100%);
+    border-radius: 20% 20% 20% 20%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    transform: rotate(45deg);
+}
+
+.pineapple-chunk::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #f9a825;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .pizza-container {
+        max-width: 350px;
+    }
+}
